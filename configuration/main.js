@@ -183,7 +183,27 @@ app.post('/api/conditions', (req, res) => {
 
 app.get('/finish', (req, res) => {
     res.render('finish.pug');
-})
+});
+
+app.get('/api/info', (req, res) => {
+
+    var code = req.query.code;
+
+    if(code == 'bertaAuthCode') {
+        Config.findOne({
+            configed: "true"
+        }, (err, config) => {
+            if(err) {
+                res.send('<h1>Request denied!</h1><p>Wrong auth code.</p>');
+            } else {
+                res.send(config);
+            }
+        });
+    } else {
+        res.send('<h1>Request denied!</h1><p>Wrong auth code.</p>');
+    }
+
+});
 
 app.get('/*', (req, res) => {
     res.redirect('/');
