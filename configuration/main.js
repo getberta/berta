@@ -185,9 +185,9 @@ app.get('/finish', (req, res) => {
     res.render('finish.pug');
 });
 
-app.get('/api/info', (req, res) => {
+app.post('/api/info', (req, res) => {
 
-    var code = req.query.code;
+    var code = req.body.code;
 
     if(code == 'bertaAuthCode') {
         Config.findOne({
