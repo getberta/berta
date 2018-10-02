@@ -3,10 +3,8 @@ var express = require('express'),
     app = express(),
     mode = 'DEV',
     mongoose = require('mongoose'),
-    spotifyWebApi = require('spotify-web-api-node'),
-    messages = require('./assets/messagesEN.js'),
-    commandBrain = require('./features/commandBrain.js'),
-    spotifyControl = require('./features/spotifyControl.js');
+    commandBrain = require('./features/commandBrain'),
+    spotifyControl = require('./features/spotifyControl');
 
 mongoose.connect('mongodb://localhost:27017/berta', (err) => {
     if(err) {

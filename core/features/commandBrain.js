@@ -1,3 +1,6 @@
+var messages = require('./../assets/messagesEN').messages;
+var spotifyControl = require('./spotifyControl');
+
 module.exports = function commandBrain(command) {
 
     var commandSplited = command.split(' ');
@@ -6,9 +9,10 @@ module.exports = function commandBrain(command) {
         console.log('berta core - Command accepted!');
         console.log(commandSplited);
 
-        if(commandSplited[2] == messages.m_play) {
-            var commandNotRep = command.replace('berta', ' ');
-            var commandDone = commandNotRep.replace(messages.m_play, ' ');
+        if(commandSplited[1] == messages.m_play) {
+            var commandNotRep = command.replace('berta', '');
+            var commandDone = commandNotRep.replace(messages.m_play, '');
+            console.log(commandDone);
             spotifyControl(commandDone);
         } 
     
