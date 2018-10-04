@@ -28,6 +28,7 @@ async function playSpotify(spotifyUri) {
 
 async function pauseSpotify() {
     try {
+        await webHelper.connect();
         await webHelper.pause();
     } catch(err) {
         
@@ -36,6 +37,7 @@ async function pauseSpotify() {
 
 async function resumeSpotify() {
     try {
+        await webHelper.connect();
         await webHelper.unpause();
     } catch(err) {
 
