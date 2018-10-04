@@ -1,6 +1,8 @@
 var spotifyWebApi = require('spotify-web-api-node');
 var messages = require('./../assets/messagesEN').messages;
 var nrc = require('node-run-cmd');
+var NodeSpotify = require ("node-spotify-helper");
+var webHelper = new NodeSpotify.SpotifyWebHelper();
 
 var spotifyApi = new spotifyWebApi({
     clientId: '18562265628b4f01a46e84eecc8ec910',
@@ -14,11 +16,36 @@ spotifyApi.clientCredentialsGrant().then((data) => {
         console.log(error);
 });
 
+async function playSpotify(spotifyUri) {
+    try {
+        var tokens = await webHelper.getTokens();
+        await webHelper.connect();
+        await webHelper.play(spotifyUri);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+async function pauseSpotify() {
+    try {
+        await webHelper.pause();
+    } catch(err) {
+        
+    }
+}
+
+async function resumeSpotify() {
+    try {
+        await webHelper.unpause();
+    } catch(err) {
+
+    }
+}
+
 module.exports = function spotifyControl(musicToPlay) {
 
     spotifyApi.searchTracks(musicToPlay).then((data) => {
-
-        console.log(data.body.tracks.items[0].uri);
+        playSpotify(data.body.tracks.items[0].uri);
     }, (error) => {
         console.log(error);
     });
